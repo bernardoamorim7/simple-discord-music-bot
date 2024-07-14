@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  simplediscordmusicbot:
+    image: simplediscordmusicbot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      # Add the bot prefix and token here
+      # BOT_PREFIX: "?"
+      # BOT_TOKEN: "YOUR_BOT_TOKEN
