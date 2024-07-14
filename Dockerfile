@@ -5,8 +5,6 @@ COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 ENV NODE_ENV=production
 RUN npm install --production --silent && mv node_modules ../
 COPY . .
-RUN chown -R node /usr/src/app
-USER node
 ENV BOT_PREFIX=?
 ENV BOT_TOKEN=YOUR_BOT_TOKEN
 CMD ["npm", "start"]
