@@ -13,6 +13,9 @@ A very simple Discord music bot written in TypeScript.
 ## Installation
 
 ### Using node
+
+Requirements: `Node.js`, `npm`, `ffmpeg`
+
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Build and run the project: `npm run start`

@@ -1,13 +1,13 @@
 import { readdir } from 'fs';
 import { config } from 'dotenv';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-import { DisTube, DisTubeEvents, Events } from 'distube';
+import { DisTube, Events } from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
 import { SoundCloudPlugin } from '@distube/soundcloud';
 import { YtDlpPlugin } from '@distube/yt-dlp';
-import responses from './responses.json';
 import { createBotInfoRectangle } from './utils/bot_info';
 import { ICommand } from './interfaces/icommand';
+import responses from './responses.json';
 
 // Load environment variables
 config();
@@ -22,10 +22,10 @@ if (!BOT_TOKEN) {
 
 // Extend the Client class to include commands and aliases
 export class CustomClient extends Client {
-   public commands: Collection<string, any>;
+   public commands: Collection<string, ICommand>;
    public aliases: Collection<string, string>;
    public distube: DisTube;
-
+   
    constructor() {
       super({
          intents: [
@@ -53,21 +53,21 @@ export class CustomClient extends Client {
 // Create a new Discord client using the CustomClient class
 const client: CustomClient = new CustomClient();
 
-readdir('./src/commands/', (err, files) => {
+readdir('./src/commands', (err, files) => {
    if (err) {
       return console.log('Could not find any commands!');
    }
 
-   const jsFiles = files.filter(f => f.split('.').pop() === 'js');
+   const tsFiles = files.filter(f => f.split('.').pop() === 'ts');
 
-   if (jsFiles.length <= 0) {
+   if (tsFiles.length <= 0) {
       return console.log('Could not find any commands!');
    }
 
-   jsFiles.forEach(file => {
-      const cmd = require(`./commands/${file}`);
+   tsFiles.forEach(file => {
+      file = file.replace('.ts', '.js');
 
-      console.log(`Command ${file} loaded!`);
+      const cmd: ICommand = require(`./commands/${file}`).default;
 
       client.commands.set(cmd.name, cmd);
 
@@ -88,7 +88,7 @@ client.on('messageCreate', async message => {
    if (message.content.startsWith(BOT_PREFIX)) {
       const args: string[] = message.content.slice(BOT_PREFIX.length).trim().split(/ +/g);
       const command: string | undefined = args.shift()?.toLowerCase();
-      const cmd: ICommand = client.commands.get(command as string) || client.commands.get(client.aliases.get(command as string) as string);
+      const cmd: ICommand | undefined = client.commands.get(command as string) || client.commands.get(client.aliases.get(command as string) as string);
 
       if (!cmd) return;
 

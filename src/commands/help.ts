@@ -1,15 +1,19 @@
-const Discord = require('discord.js')
+import { ICommand } from "../interfaces/icommand";
+import { EmbedBuilder } from 'discord.js';
 
-module.exports = {
+const help: ICommand = {
     name: 'help',
     aliases: ['h', 'cmd', 'command'],
+    inVoiceChannel: false,
     run: async (client, message) => {
         message.channel.send({
             embeds: [
-                new Discord.EmbedBuilder()
+                new EmbedBuilder()
                     .setTitle('Commands')
                     .setDescription(client.commands.map(cmd => `\`${cmd.name}\``).join(', '))
             ]
-        })
+        });
     }
-}
+};
+
+export default help;
