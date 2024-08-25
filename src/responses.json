@@ -1,7 +1,9 @@
 {
     "responses": [
         {
-            "trigger": "ping",
+            "triggers": [
+                "ping"
+            ],
             "response": "Pong!"
         }
     ]

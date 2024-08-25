@@ -103,11 +103,14 @@ client.on('messageCreate', async message => {
          await message.channel.send(`Error: \`${error}\``);
       }
    } else {
-      responses.responses.forEach(response => {
-         const trigger = Array.isArray(response.trigger) ? response.trigger.join(' ') : response.trigger;
-         if (message.content.toLowerCase().includes(trigger)) {
-            message.channel.send(response.response);
+      responses.responses.forEach(async response => {
+         const content = message.content.toLowerCase();
+
+         if (!response.triggers.some((trigger: string) => content.includes(trigger))) {
+            return;
          }
+
+         await message.channel.send(response.response);
       });
    }
 });
