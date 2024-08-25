@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-RUN apk add libtool ffmpeg make gcc g++ python3 autoconf automake git vim --no-cache
+RUN apk add libtool ffmpeg make gcc g++ python3 autoconf automake git vim nano --no-cache
 WORKDIR /usr/src/app
 RUN git clone "https://github.com/bernardoamorim7/simple-discord-music-bot.git"
 WORKDIR /usr/src/app/simple-discord-music-bot
