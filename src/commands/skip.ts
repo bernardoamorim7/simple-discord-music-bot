@@ -6,15 +6,15 @@ const skip: ICommand = {
     run: async (client, message) => {
         const queue = client.distube.getQueue(message);
 
-        if (!queue) {
+        if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
             return message.channel.send(`There is nothing in the queue right now!`);
         }
 
         try {
             const song = await queue.skip();
-            message.channel.send(`Skipped! Now playing:\n${song.name}`);
+            await message.channel.send(`Skipped! Now playing:\n${song.name}`);
         } catch (e) {
-            message.channel.send(`${e}`);
+            await message.channel.send(`${e}`);
         }
     }
 };

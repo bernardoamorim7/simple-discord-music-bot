@@ -8,7 +8,7 @@ export function createBotInfoRectangle(client: CustomClient): string {
 
     // Base strings without dynamic content
     const baseStrings = [
-        "Simple Discord Music Bot v1.1.0",
+        "Simple Discord Music Bot v1.3.0",
         "Bot is online!",
         "",
         "",

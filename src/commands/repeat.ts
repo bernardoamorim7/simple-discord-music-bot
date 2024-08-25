@@ -8,8 +8,8 @@ const repeat: ICommand = {
   run: async (client, message, args) => {
     const queue = client.distube.getQueue(message);
 
-    if (!queue) {
-      return message.channel.send(`There is nothing playing!`);
+    if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+      return await message.channel.send(`There is nothing playing!`);
     }
 
     let mode: RepeatMode;
@@ -28,7 +28,7 @@ const repeat: ICommand = {
 
     mode = queue.setRepeatMode(mode!);
 
-    message.channel.send(`Set repeat mode to \`${mode}\``);
+    await message.channel.send(`Set repeat mode to \`${mode}\``);
   }
 };
 

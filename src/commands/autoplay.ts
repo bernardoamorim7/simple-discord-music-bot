@@ -6,13 +6,13 @@ const autoplay: ICommand = {
   run: async (client, message) => {
     const queue = client.distube.getQueue(message);
 
-    if (!queue) {
-      return message.channel.send(`${client.emojis} | There is nothing in the queue right now!`);
+    if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+      return await message.channel.send(`${client.emojis} | There is nothing in the queue right now!`);
     }
 
-    const autoplay = queue.toggleAutoplay();
+    const autoplay: boolean = queue.toggleAutoplay();
 
-    message.channel.send(`AutoPlay: \`${autoplay ? 'On' : 'Off'}\``);
+    await message.channel.send(`AutoPlay: \`${autoplay ? 'On' : 'Off'}\``);
   }
 };
 

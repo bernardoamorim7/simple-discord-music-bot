@@ -1,7 +1,8 @@
 FROM node:lts-alpine
-RUN apk add libtool ffmpeg make gcc g++ python3 autoconf automake --no-cache
+RUN apk add libtool ffmpeg make gcc g++ python3 autoconf automake git vim --no-cache
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN git clone "https://github.com/bernardoamorim7/simple-discord-music-bot.git"
+WORKDIR /usr/src/app/simple-discord-music-bot
 ENV NODE_ENV=production
 RUN npm install --production --silent && mv node_modules ../
 COPY . .

@@ -7,11 +7,11 @@ const filter: ICommand = {
   run: async (client, message, args) => {
     const queue = client.distube.getQueue(message);
 
-    if (!queue) {
-      return message.channel.send(`There is nothing in the queue right now!`);
+    if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+      return await message.channel.send(`There is nothing in the queue right now!`);
     }
 
-    const filter = args[0];
+    const filter: string = args[0];
 
     if (filter === 'off' && queue.filters.size) {
       queue.filters.clear();
@@ -22,10 +22,10 @@ const filter: ICommand = {
         queue.filters.add(filter);
       }
     } else if (args[0]) {
-      return message.channel.send(`Not a valid filter`);
+      return await message.channel.send(`Not a valid filter`);
     }
 
-    message.channel.send(`Current Queue Filter: \`${queue.filters.names.join(', ') || 'Off'}\``);
+    await message.channel.send(`Current Queue Filter: \`${queue.filters.names.join(', ') || 'Off'}\``);
   }
 };
 

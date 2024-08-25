@@ -7,18 +7,18 @@ const pause: ICommand = {
     run: async (client, message) => {
         const queue = client.distube.getQueue(message);
 
-        if (!queue) {
-            return message.channel.send(`There is nothing in the queue right now!`);
+        if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+            return await message.channel.send(`There is nothing in the queue right now!`);
         }
 
         if (queue.paused) {
             queue.resume();
-            return message.channel.send('Resumed the song for you :)');
+            return await message.channel.send('Resumed the song for you :)');
         }
 
         queue.pause();
 
-        return message.channel.send('Paused the song for you :)');
+        return await message.channel.send('Paused the song for you :)');
     }
 };
 

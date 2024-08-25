@@ -36,6 +36,12 @@ BOT_TOKEN=your_bot_token
 
 Replace `your_bot_token` with your Discord bot token.
 
+### Changing `responses.json`
+
+Using the `responses.json` file, you can customize the bot's responses.  
+
+To edit it using a Docker container, you can enter the container's shell, navigate to `/usr/src/app`, and edit the file using `nano` or `vim`.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -7,7 +7,8 @@ const nowplaying: ICommand = {
   run: async (client, message, args) => {
     const queue = client.distube.getQueue(message);
 
-    if (!queue) {
+        if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+
       return message.channel.send(`There is nothing in the queue right now!`);
     }
 

@@ -25,7 +25,7 @@ export class CustomClient extends Client {
    public commands: Collection<string, ICommand>;
    public aliases: Collection<string, string>;
    public distube: DisTube;
-   
+
    constructor() {
       super({
          intents: [
@@ -93,20 +93,20 @@ client.on('messageCreate', async message => {
       if (!cmd) return;
 
       if (cmd.inVoiceChannel && !message.member?.voice.channel) {
-         return message.channel.send(`You must be in a voice channel!`)
+         return await message.channel.send(`You must be in a voice channel!`)
       }
 
       try {
-         cmd.run(client, message, args);
+         await cmd.run(client, message, args);
       } catch (error) {
          console.error(error);
-         message.channel.send(`Error: \`${error}\``);
+         await message.channel.send(`Error: \`${error}\``);
       }
    } else {
-      responses.responses.forEach(response => {
+      responses.responses.forEach(response => async () => {
          const trigger = Array.isArray(response.trigger) ? response.trigger.join(' ') : response.trigger;
          if (message.content.toLowerCase().includes(trigger)) {
-            message.channel.send(response.response);
+            await message.channel.send(response.response);
          }
       });
    }
@@ -114,7 +114,8 @@ client.on('messageCreate', async message => {
 
 const status = (queue: { volume: any; filters: { names: any[]; }; repeatMode: number; autoplay: any; }) =>
    `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
-   }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
+   }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``;
+
 client.distube
    .on(Events.PLAY_SONG, (queue, song) =>
       queue.textChannel?.send(

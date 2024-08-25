@@ -6,11 +6,11 @@ const shuffle: ICommand = {
   run: async (client, message) => {
     const queue = client.distube.getQueue(message);
 
-    if (!queue) {
+    if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
       return message.channel.send(`There is nothing in the queue right now!`);
     }
 
-    queue.shuffle();
+    await queue.shuffle();
 
     message.channel.send('Shuffled songs in the queue');
   }

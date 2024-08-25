@@ -7,15 +7,15 @@ const resume: ICommand = {
     run: async (client, message) => {
         const queue = client.distube.getQueue(message);
 
-        if (!queue) {
-            return message.channel.send(`There is nothing in the queue right now!`);
+        if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
+            return await message.channel.send(`There is nothing in the queue right now!`);
         }
 
         if (queue.paused) {
             queue.resume();
-            message.channel.send('Resumed the song for you :)');
+            await message.channel.send('Resumed the song for you :)');
         } else {
-            message.channel.send('The queue is not paused!');
+            await message.channel.send('The queue is not paused!');
         }
     }
 };
