@@ -2,7 +2,7 @@ import { ICommand } from "../interfaces/icommand";
 
 const coinflip: ICommand = {
   name: 'coinflip',
-  inVoiceChannel: true,
+  inVoiceChannel: false,
   run: async (client, message) => {
     let coin: Number = Math.round(Math.random()) + 1;
     
