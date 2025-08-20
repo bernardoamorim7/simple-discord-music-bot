@@ -44,7 +44,7 @@ export class CustomClient extends Client {
          plugins: [
             new SpotifyPlugin(),
             new SoundCloudPlugin(),
-            new YtDlpPlugin()
+            new YtDlpPlugin(),
          ]
       });
    }
