@@ -8,14 +8,14 @@ const queue: ICommand = {
         const queue = client.distube.getQueue(message);
 
         if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
-            return await message.channel.send(`There is nothing playing!`);
+            return await message.reply(`There is nothing playing!`);
         }
 
         const q = queue.songs
             .map((song, i) => `${i === 0 ? 'Playing:' : `${i}.`} ${song.name} - \`${song.formattedDuration}\``)
             .join('\n');
 
-        await message.channel.send(`**Server Queue**\n${q}`);
+        await message.reply(`**Server Queue**\n${q}`);
     }
 }
 

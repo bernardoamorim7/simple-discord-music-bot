@@ -9,12 +9,12 @@ const nowplaying: ICommand = {
 
         if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
 
-      return message.channel.send(`There is nothing in the queue right now!`);
+      return message.reply(`There is nothing in the queue right now!`);
     }
 
     const song = queue.songs[0];
 
-    message.channel.send(`I'm playing **\`${song.name}\`**, by ${song.user}`);
+    message.reply(`I'm playing **\`${song.name}\`**, by ${song.user}`);
   }
 };
 

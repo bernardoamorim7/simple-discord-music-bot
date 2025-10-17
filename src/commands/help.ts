@@ -6,7 +6,7 @@ const help: ICommand = {
     aliases: ['h', 'cmd', 'command'],
     inVoiceChannel: false,
     run: async (client, message) => {
-        await message.channel.send({
+        await message.reply({
             embeds: [
                 new EmbedBuilder()
                     .setTitle('Commands')

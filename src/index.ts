@@ -93,14 +93,14 @@ client.on('messageCreate', async message => {
       if (!cmd) return;
 
       if (cmd.inVoiceChannel && !message.member?.voice.channel) {
-         return await message.channel.send(`You must be in a voice channel!`)
+         return await message.reply(`You must be in a voice channel!`)
       }
 
       try {
          await cmd.run(client, message, args);
       } catch (error) {
          console.error(error);
-         await message.channel.send(`Error: \`${error}\``);
+         await message.reply(`Error: \`${error}\``);
       }
    } else {
       responses.responses.forEach(async response => {
@@ -110,7 +110,7 @@ client.on('messageCreate', async message => {
             return;
          }
 
-         await message.channel.send(response.response);
+         await message.reply(response.response);
       });
    }
 });

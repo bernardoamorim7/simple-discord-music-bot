@@ -7,12 +7,12 @@ const shuffle: ICommand = {
     const queue = client.distube.getQueue(message);
 
     if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
-      return message.channel.send(`There is nothing in the queue right now!`);
+      return message.reply(`There is nothing in the queue right now!`);
     }
 
     await queue.shuffle();
 
-    message.channel.send('Shuffled songs in the queue');
+    message.reply('Shuffled songs in the queue');
   }
 };
 

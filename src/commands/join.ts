@@ -12,12 +12,12 @@ const join: ICommand = {
       voiceChannel = await client.channels.fetch(args[0]) as VoiceChannel;
 
       if (!Constants.VoiceBasedChannelTypes.includes(voiceChannel?.type)) {
-        return await message.channel.send(`${args[0]} is not a valid voice channel!`);
+        return await message.reply(`${args[0]} is not a valid voice channel!`);
       }
     }
 
     if (!voiceChannel) {
-      return await message.channel.send(
+      return await message.reply(
         `You must be in a voice channel or enter a voice channel id!`
       );
     }

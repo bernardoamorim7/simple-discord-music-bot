@@ -6,7 +6,7 @@ const coinflip: ICommand = {
   run: async (client, message) => {
     let coin: Number = Math.round(Math.random()) + 1;
     
-    await message.channel.send(`The result of the coinflip is... **${coin === 1 ? 'Heads' : 'Tails'}**!`);
+    await message.reply(`The result of the coinflip is... **${coin === 1 ? 'Heads' : 'Tails'}**!`);
   }
 };
 

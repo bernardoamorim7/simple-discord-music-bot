@@ -8,12 +8,12 @@ const previous: ICommand = {
 
         if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
 
-      return message.channel.send(`There is nothing in the queue right now!`);
+      return message.reply(`There is nothing in the queue right now!`);
     }
 
     const song = queue.previous();
     
-    message.channel.send(`Now playing: ${(await song).name}`);
+    message.reply(`Now playing: ${(await song).name}`);
   }
 };
 

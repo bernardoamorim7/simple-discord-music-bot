@@ -9,11 +9,11 @@ const playstop: ICommand = {
     const string = args.join(' ');
 
     if (!string) {
-      return await message.channel.send(`Please enter a song url or query to search.`);
+      return await message.reply(`Please enter a song url or query to search.`);
     }
 
     if (!message.member?.voice.channel) {
-      return await message.channel.send(`You must be in a voice channel!`);
+      return await message.reply(`You must be in a voice channel!`);
     }
 
     await client.distube.play(message.member.voice.channel, string, {

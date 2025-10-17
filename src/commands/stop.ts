@@ -8,12 +8,12 @@ const stop: ICommand = {
         const queue = client.distube.getQueue(message);
 
         if (!queue || queue === undefined || queue.songs.length === 0 || !queue.playing) {
-            return message.channel.send(` There is nothing in the queue right now!`);
+            return message.reply(` There is nothing in the queue right now!`);
         }
 
         await queue.stop();
 
-        return message.channel.send(`Stopped!`);
+        return message.reply(`Stopped!`);
     }
 };
 
